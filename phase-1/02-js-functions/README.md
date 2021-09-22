@@ -10,6 +10,10 @@
 ### Warm Up Question
 
 💡 What are functions and what do they help us accomplish?
+    - promote modularity, wrap behaviors
+    - separation of concerns
+    - building blocks of javascript
+    
 
 ### Resources
 
