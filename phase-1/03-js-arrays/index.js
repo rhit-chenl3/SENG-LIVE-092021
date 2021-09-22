@@ -75,8 +75,15 @@ console.log("------------------------");
         // Example: getFirstElement([1, 2, 3]) => 1
         // Example: getFirstElement([-10, 0, 10]) => -10
 
+        function getFirstElement(array){
+            return array.shift();
+        }
+
         // ✅ Check Answer: 
-        // console.log(getFirstElement());
+        console.log(getFirstElement([10, 9, 8]));
+        console.log(getFirstElement([1, 2, 3]));
+        console.log(getFirstElement([-10, 0, 10]));
+
 
     // 2️⃣ Create a function that returns an array of unique strings sorted by length in ascending order.
 
@@ -86,9 +93,16 @@ console.log("------------------------");
         // ❗ If the provided array is empty, return an empty array
 
         // Example: sortWords([]) => []
+        function sortWords(stringArray){
+            const newArray = stringArray.sort(function(a, b){
+                return a.length - b.length;
+            })
+            return newArray;
+        }
 
         // ✅ Check Answer: 
-        // console.log(sortWords());
+        console.log(sortWords(["i'm", "louis", "hi"]));
+        console.log(sortWords(["yellow", "red", "blue"]));
 
 // 🚧 Break Out Activity 2: Iterating Through Arrays
 
@@ -103,8 +117,19 @@ console.log("------------------------");
 
         // ❗ Aim to use loops, ".map()" or other Array methods that we have covered
 
+        function removeDuplicates(numArray){
+            let newArray = [];
+            for (let i = 0; i < numArray.length; i++) {
+                if (newArray.indexOf(numArray[i]) < 0){
+                    newArray.push(numArray[i]);
+                }
+            }
+            return newArray;
+        }
+
+
         // ✅ Check Answer: 
-        // console.log(removeDuplicates());
+        console.log(removeDuplicates([1, 1, 2, 2, 3, 3]));
 
 // 🚧 Break Out Activity 3: Advanced Array Challenge
 
