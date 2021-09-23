@@ -86,12 +86,17 @@ console.log("------------------------");
 
         // ❗ volume => length * width * height
 
-            
-
-
-        
+        function computeVolume(obj){
+            let volume = 1;
+            for (let key in obj){
+                volume = volume * obj[key];
+            }
+            return volume;
+        }
+    
+        const dimensions = { length: 3, width: 5, height: 7 };
         // ✅ Check Answer: 
-        // console.log(computeVolume(dimensions));
+        console.log(computeVolume(dimensions));
 
     // 2️⃣ Create a function that accepts an object (myObject) and converts it into / returns an array (myArray).
         
@@ -106,12 +111,14 @@ console.log("------------------------");
 
         // 💡 Consider using a combination of Object.keys and map() in your solution.
 
+        function convertToArray(myObject){
+            let keys = Object.keys(myObject);
+            return keys.map(element => [element, myObject[element]] );
+        }
 
-
-
-
+        const myObject = { x: 1, y: 2, z: 3 };
         // ✅ Check Answer: 
-        // console.log(convertToArray(myObject));
+        console.log(convertToArray(myObject));
 
 // 🚧 Break Out Activity 2: Modifying / Iterating Over Objects
 
@@ -124,11 +131,18 @@ console.log("------------------------");
         // 💡 Try making use of a "for...in" loop to iterate over originalObject's keys.
 
 
+        function invertObject(normalObject){
+            let newObject = {};
+            for (let key in normalObject){
+                newObject[normalObject[key]] = key;
+            }
+            return newObject;
+        }
 
-
+        const normalObject = { x: 1, y: 2, z: 3 };
 
         // ✅ Check Answer: 
-        // console.log(invertObject(normalObject));
+        console.log(invertObject(normalObject));
 
 // 🚧 Break Out Activity 3: Stretch Challenge
 
