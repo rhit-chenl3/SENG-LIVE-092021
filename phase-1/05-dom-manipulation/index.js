@@ -103,6 +103,21 @@ console.log("------------------------");
 
 	// 	✨ BONUS: Try to reduce redudancy (DRY Principle) in your code through the use of JS functions and variables.
 
+	function renderPokemon(pokemon) {
+		const pokeCard = document.createElement("div");
+		pokeCard.id = `poke-${pokemon.id}`;
+		pokeCard.className = "poke-card";
+	  
+		const pokeImg = document.createElement("img");
+		pokeImg.src = pokemon.img;
+		pokeImg.alt = `${pokemon.name} image`;
+	  
+		const pokeName = document.createElement("h3");
+		pokeName.textContent = pokemon.name;
+	  
+		pokeCard.append(pokeImg, pokeName);
+		pokeContainer.append(pokeCard);
+	}
 
 
 
@@ -144,7 +159,41 @@ console.log("------------------------");
 
 	// 	✨ BONUS: Try to reduce redudancy (DRY Principle) in your code through the use of JS functions and variables.
 
+	function renderPokemon(pokemon) {
+		
+		// --------- Break Out 1 --------- //
+		const pokeCard = document.createElement("div");
+		pokeCard.id = `poke-${pokemon.id}`;
+		pokeCard.className = "poke-card";
+	  
+		const pokeImg = document.createElement("img");
+		pokeImg.src = pokemon.img;
+		pokeImg.alt = `${pokemon.name} image`;
+	  
+		const pokeName = document.createElement("h3");
+		pokeName.textContent = pokemon.name;
 
+		// --------- Break Out 2 --------- //
+		const pokeLikes = document.createElement("h3");
+		pokeLikes.textContent = "Likes: ";
+	  
+		const likesNum = document.createElement("h5");
+		likesNum.className = "likes-num";
+		likesNum.textContent = pokemon.likes;
+	  
+		const likeBttn = document.createElement("button");
+		likeBttn.className = "likes-bttn";
+		likeBttn.textContent = "♥️";
+		// likeBttn.addEventListener('click', () => increaseLike(pokemon, likesNum))
+		
+		const deleteBttn = document.createElement("button");
+		deleteBttn.className = "delete-bttn";
+		deleteBttn.textContent = "Delete";
+		// deleteBttn.addEventListener('click', () => deletePoke(pokeCard))
+	  
+		pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likeBttn, deleteBttn);
+		pokeContainer.append(pokeCard);
+	}
 
 
 
