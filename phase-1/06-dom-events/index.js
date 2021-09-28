@@ -12,7 +12,15 @@
 
       // addEventListener("click", () => console.log("Test"));
         // vs. 
-      // addEventListener("click", doSomething);
+
+        // const pokeForm = document.getElementById("poke-form");
+
+        // function doSomething(e) {
+        //   e.preventDefault();
+        //   // do some stuff
+        // }
+        
+        // pokeForm.addEventListener("submit", (e) => doSomething(e));
 
 // ✅ .preventDefault()
 
@@ -88,6 +96,7 @@ console.log("------------------------");
 
     // 	💡 Use Chrome Dev Tools to view changes being made to the DOM
 
+
   // 2️⃣ Create a function (deletePokemon) that:
 
     //  ✔️ Accepts a single pokeCard as a parameter
@@ -98,6 +107,8 @@ console.log("------------------------");
     //  callback function (deletePokemon).
 
     // 	💡 Use Chrome Dev Tools to view changes being made to the DOM
+
+
 
     function renderPokemon(pokemon) {
 		
@@ -133,12 +144,14 @@ console.log("------------------------");
       likeBttn.textContent = "♥";
       
       // ❗ add likeBttn event listener ❗
+      likeBttn.addEventListener('click', () => addLike(pokemon, likesNum));
 
       // set deleteBtt attributes
       deleteBttn.className = "delete-bttn";
       deleteBttn.textContent = "Delete";
   
       // ❗ add deleteBttn event listener ❗
+      deleteBttn.addEventListener('click', () => deletePoke(pokeCard));
   
       // append DOM elements to pokeCard
       pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likeBttn, deleteBttn);
@@ -149,18 +162,22 @@ console.log("------------------------");
 
     function addLike(pokemon, likesNum){
     //   // ❗ your code here
+      
+      pokemon.likes++;
+      likesNum.textContent = pokemon.likes;
     }
 
     function deletePoke(pokeCard){
     //   // ❗ your code here
+      pokeCard.remove();
     }
 
 	// ✅ Check Answer: 
-	function init() {
-		pokemons.forEach(renderPokemon);
-	}
+	// function init() {
+	// 	pokemons.forEach(renderPokemon);
+	// }
 
-	init();
+	// init();
 
 // 🚧 Break Out Activity 2: Handling Submit Events
 
@@ -187,14 +204,24 @@ console.log("------------------------");
 
 	// 	💡 Use Chrome Dev Tools to view changes being made to the DOM
   
-    // function createPokemon(){
-    //   // ❗ your code here
-    // }
+    function createPokemon(e){
+      // ❗ your code here
+      e.preventDefault();
+      const newPokemon = [];
+      newPokemon.name = e.target.querySelector('#name-input').value;
+      newPokemon.id = pokemons.slice(-1).id + 1;
+      newPokemon.img = './images/whos_that_pokemon.png';
+      newPokemon.likes = 0;
+      pokemons.push(newPokemon);
+
+      renderPokemon(newPokemon);
+      e.target.reset();
+    }
 
   // ✅ Check Answer: 
-  // function init() {
-  //   pokemons.forEach(renderPokemon);
-  //   pokeForm.addEventListener('submit', createPokemon)
-  // }
+  function init() {
+    pokemons.forEach(renderPokemon);
+    pokeForm.addEventListener('submit', createPokemon)
+  }
   
-  // init()
+  init()

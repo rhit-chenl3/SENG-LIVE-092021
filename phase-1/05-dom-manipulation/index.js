@@ -4,31 +4,91 @@
 
 // ✅ Creating / Reading DOM Elements
 
+	// CRUD => Create, Read, Update, Destroy
+
     // .createElement() => creates one DOM element
+
+		// let myDiv = document.createElement("div");
+
+		// let otherElement = document.getElementById('someId');
+
+		// otherElement.append(myDiv);
 
 	// .querySelector() => returns the first matching DOM element
 
+		// let myQuery = document.querySelector('div');
+
 	// .querySelectorAll() => returns an array of matching DOM elements
+
+		// let myQuieries = document.querySelectorAll('div');
+
+		// console.log(myQuieries);
 
 	// .getElementById() => returns the DOM element with matching Id
 
+		// let myElement = document.getElementById('');
+
 	// .getElementsByClassName() => returns an array of DOM elements with matching Class
 
+		// let myElements = document.getElementsByClassName("form-label");
+
+		// console.log(myElements);
+
 	// .getElementsByTagName() => when is this especially useful?
+
+		// let myElements = document.getElementsByTagName("div");
+
+		// console.log(myElements[0]);
+
+		// myElements.map(element => {
+		// 	return
+		// });
+
+		// let myArray = [] 
+
+		// myArray.push(myElements[0])
         
 // ✅ Updating / Deleting DOM Elements
         
 	// .append
+		
+		// let myDiv = document.createElement("div");
+
+		// let otherElement = document.createElement("h1");
+
+		// myDiv.append(otherElement);
 
 	// .remove()
 
+		// console.log(myElements);
+
+		// myElements[0].remove();
+
 // ✅ .innerHTML vs. .innerText vs. .textContent
 
-  	// .innerHTML => if you want to insert HTML within a DOM element
+	// let firstDiv = document.getElementById('lecture-goals');
+
+  	// .innerHTML => if you want to insert HTML within a DOM element, shows full HTML structure
+
+	  	// let anotherElement = document.createElement("h1");
+	 
+		// firstDiv.append(anotherElement);
+
+		// firstDiv.innerHTML = "<h1>Hey!</h1>"
+
+	 	// console.log(firstDiv.innerHTML);
 
 	// .innerText => if you only want to insert text, shows only human-readable elements
 
-	// .textContent => if you only want to insert text, shows formatting of elements
+		// firstDiv.innerText = "Hey!";
+
+		// console.log(firstDiv.innerText);
+
+	// .textContent => *if you only want to insert text, shows formatting of elements*
+
+		// firstDiv.textContent = "Hey!";
+
+		// console.log(firstDiv.textContent);
 
 // -------------------------------------------
 
@@ -77,7 +137,7 @@ console.log("------------------------");
 		];
 
 		// container to store DOM element with ID of "poke-container" => <div id="poke-container"></div>
-		const pokeContainer = document.getElementById("poke-container");
+		const pokeContainer = document.getElementById("poke-container"); 
 
   // 1️⃣ Given "pokemon" and "pokeContainer" above, create a function (renderPokemon) that:
 
@@ -103,26 +163,25 @@ console.log("------------------------");
 
 	// 	✨ BONUS: Try to reduce redudancy (DRY Principle) in your code through the use of JS functions and variables.
 
-	function renderPokemon(pokemon) {
-		const pokeCard = document.createElement("div");
-		pokeCard.id = `poke-${pokemon.id}`;
-		pokeCard.className = "poke-card";
+	// function renderPokemon(pokemon) {
+	// 	const pokeCard = document.createElement("div");
+		
+	// 	pokeCard.id = `poke-${pokemon.id}`;
+	// 	pokeCard.className = "poke-card";
 	  
-		const pokeImg = document.createElement("img");
-		pokeImg.src = pokemon.img;
-		pokeImg.alt = `${pokemon.name} image`;
+	// 	const pokeImg = document.createElement("img");
+	// 	pokeImg.src = pokemon.img;
+	// 	pokeImg.alt = `${pokemon.name} image`;
 	  
-		const pokeName = document.createElement("h3");
-		pokeName.textContent = pokemon.name;
+	// 	const pokeName = document.createElement("h3");
+	// 	pokeName.textContent = pokemon.name;
 	  
-		pokeCard.append(pokeImg, pokeName);
-		pokeContainer.append(pokeCard);
-	}
+	// 	pokeCard.append(pokeImg, pokeName);
+	// 	pokeContainer.append(pokeCard);
+	// }
 
 
-
-
-	// ✅ Check Answer: 
+	// // ✅ Check Answer: 
 	// function init() {
 	// 	pokemon.forEach(renderPokemon);
 	// }
@@ -159,47 +218,65 @@ console.log("------------------------");
 
 	// 	✨ BONUS: Try to reduce redudancy (DRY Principle) in your code through the use of JS functions and variables.
 
-	function renderPokemon(pokemon) {
-		
-		// --------- Break Out 1 --------- //
-		const pokeCard = document.createElement("div");
-		pokeCard.id = `poke-${pokemon.id}`;
-		pokeCard.className = "poke-card";
-	  
-		const pokeImg = document.createElement("img");
-		pokeImg.src = pokemon.img;
-		pokeImg.alt = `${pokemon.name} image`;
-	  
-		const pokeName = document.createElement("h3");
-		pokeName.textContent = pokemon.name;
-
-		// --------- Break Out 2 --------- //
-		const pokeLikes = document.createElement("h3");
-		pokeLikes.textContent = "Likes: ";
-	  
-		const likesNum = document.createElement("h5");
-		likesNum.className = "likes-num";
-		likesNum.textContent = pokemon.likes;
-	  
-		const likeBttn = document.createElement("button");
-		likeBttn.className = "likes-bttn";
-		likeBttn.textContent = "♥️";
-		// likeBttn.addEventListener('click', () => increaseLike(pokemon, likesNum))
-		
-		const deleteBttn = document.createElement("button");
-		deleteBttn.className = "delete-bttn";
-		deleteBttn.textContent = "Delete";
-		// deleteBttn.addEventListener('click', () => deletePoke(pokeCard))
-	  
-		pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likeBttn, deleteBttn);
-		pokeContainer.append(pokeCard);
-	}
-
-
-
-	// ✅ Check Answer: 
-	// function init() {
-	// 	pokemon.forEach(renderPokemon);
+	// 💯 student submission for dynamically setting property values using bracket notation
+	// function setProperty(element, property, value) {
+	// 	return element[property] = value;
 	// }
 
-	// init();
+	// reusable syntax for creating elements / shorter syntax
+	const makeEl = el => document.createElement(el);
+
+	function renderPokemon(pokemon) {
+		
+		// grouping variable assignments helps to improve readability
+		const pokeCard = makeEl("div");
+		const pokeImg = makeEl("img");
+		const pokeName = makeEl("h3");
+		const pokeLikes = makeEl("h3");
+		const likesNum = makeEl("h5");
+		const likeBttn = makeEl("button");
+		const deleteBttn = makeEl("button");
+
+		// --------- Break Out 1 --------- //
+		
+		// // set pokeCard attributes
+		pokeCard.id = `poke-${pokemon.id}`;
+		pokeCard.className = "poke-card";
+				
+		// // set pokeImg attributes
+		pokeImg.src = pokemon.img;
+		pokeImg.alt = `${pokemon.name} image`;
+
+		// // set pokeName attributes
+		pokeName.textContent = pokemon.name;
+
+		// // --------- Break Out 2 --------- //
+
+		// // set pokeLikes attributes
+		pokeLikes.textContent = "Likes: ";
+	
+		// // set likesNum attributes
+		likesNum.className = "like-num";
+		likesNum.textContent = pokemon.likes;
+	  
+		// // set likeBttn attributes
+		likeBttn.className = "likes-bttn";
+		likeBttn.textContent = "♥";
+		
+		// // set deleteBtt attributes
+		deleteBttn.className = "delete-bttn";
+		deleteBttn.textContent = "Delete";
+
+		// append DOM elements to pokeCard
+		pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likeBttn, deleteBttn);
+		
+		// append pokeCard to pokeContainer
+		pokeContainer.append(pokeCard);
+	};
+
+	// ✅ Check Answer: 
+	function init() {
+		pokemon.forEach(renderPokemon);
+	}
+
+	init();
