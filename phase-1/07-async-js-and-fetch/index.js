@@ -32,7 +32,7 @@
 
 // ✅ HTTP Verbs
 
-    // CRUD => POST, GET, PATCH, DELETE
+    // CRUD (CREATE, READ, UPDATE, DESTROY) => POST, GET, PATCH, DELETE
 
 // ✅ GET Requests with External API
 
@@ -64,7 +64,7 @@
     // .then(breweries => {
     //     console.log(breweries)
     // }).catch(error => {
-    //     console.log(`Here's my error: ${error}`);
+    //     console.log(`HERE's my error: ${error}`);
     // });
 
 // -------------------------------------------
@@ -119,7 +119,7 @@ console.log("------------------------");
         header.textContent = "No Breweries Found";
 
         div.append(icon, header);
-        container.appendChild(div);
+        brewList.appendChild(div);
     }
 
     // 1️⃣ Create a function (getAllBreweries) that:
@@ -132,6 +132,15 @@ console.log("------------------------");
 
         function getAllBreweries(){
             // ❗ your code here
+            fetch(BASE_URL)
+            .then(resp => resp.json())
+            .then(breweries => {
+                // both methods below are the same
+                breweries.forEach(renderBrew);
+                // breweries.forEach(element => renderBrew(element));
+            }).catch(error => {
+                console.log(`HERE's my error: ${error}`);
+            });
         }
 
         // ✅ Check Answer: 
@@ -149,9 +158,16 @@ console.log("------------------------");
 
         function getBreweriesByCity(city){
             // ❗ your code here
+            fetch(BASE_URL + '?by_city=' + city)
+            .then(resp => resp.json())
+            .then(breweries => {
+                breweries.forEach(element => renderBrew(element));
+            }).catch(error => {
+                console.log(`HERE's my error: ${error}`);
+            });
         }
 
-        // ✅ Check Answer: 
+        // // ✅ Check Answer: 
         // document.addEventListener('DOMContentLoaded', getBreweriesByCity('miami'));
 
     // 3️⃣  Create a function (getBreweriesByState) that:
@@ -166,8 +182,15 @@ console.log("------------------------");
 
         function getBreweriesByState(state){
             // ❗ your code here
+            fetch(BASE_URL + '?by_state=' + state)
+            .then(resp => resp.json())
+            .then(breweries => {
+                breweries.forEach(element => renderBrew(element));
+            }).catch(error => {
+                console.log(`HERE's my error: ${error}`);
+            });
         }
-    
+        
         // ✅ Check Answer: 
         // document.addEventListener('DOMContentLoaded', getBreweriesByState('florida'));
 
@@ -193,7 +216,26 @@ console.log("------------------------");
 
         function searchBreweries(e){
             // ❗ your code here
+            e.preventDefault();
+            const query = e.target.querySelector('#brew-input').value;
+
+            fetch(BASE_URL + `/search?query=${query}`)
+            .then(resp => resp.json())
+            .then(breweries => {
+                console.log(breweries);
+                if(breweries.length == 0){
+                    returnNone();
+                }else{
+                    breweries.forEach(element => renderBrew(element));
+                }
+                // can also use ternary operator:
+                // { breweries.length == 0 ? returnNone() : breweries.forEach(renderBrew)}
+            }).catch(error => {
+                console.log(`HERE's my error: ${error}`)
+            });
+            brewForm.reset();
+            brewList.replaceChildren();
         }
 
         // ✅ Check Answer: 
-        // brewForm.addEventListener('submit', searchBreweries);
+        brewForm.addEventListener('submit', searchBreweries);
