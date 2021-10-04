@@ -29,6 +29,21 @@
       "id": 2,
       "user": "Alice",
       "content": "I love Ivysaur more!"
+    },
+    {
+      "id": 3,
+      "user": "Leo",
+      "content": "Charizard is the best!"
+    },
+    {
+      "id": 4,
+      "user": "test",
+      "content": "test"
+    },
+    {
+      "id": 5,
+      "user": "tester",
+      "content": "tester"
     }
   ]
 }

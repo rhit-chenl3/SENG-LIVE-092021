@@ -4,7 +4,7 @@
 
         // let num1 = 5, num2 = 10;
 
-        // let product = num1 x num2;
+        // let product = num1 * num2;
 
         // console.log(product);
 
@@ -12,7 +12,7 @@
 
         // let x = prompt("What is 5 x 5?");
         
-        // while (x != 25) do {
+        // while (x != 25) {
         //     alert("Incorrect");
         //     x = prompt("What is 5 x 5?");
         // }
@@ -22,18 +22,20 @@
         // let num1 = prompt("Write a number");
         // let num2 = 10;
         
-        // if (num1 > num2) {
+        // if (num1 < num2) {
         //     console.log(`The number you wrote, ${num1}, is less than 10`);
-        // } else {
+        // } else if (num1 > num2){
         //     console.log(`The number you wrote, ${num1}, is more than 10`);
+        // } else{
+        //     console.log(`The number you wrote, ${num1}, is equal to 10`)
         // }
 
     // logic => faulty design
 
         // console.log("counting from 1 to 10... ");
         
-        // for (i=1; i<11; i+=1) {
-        //   console.log(++i + ' ');
+        // for (i=1; i<11; i++) {
+        //   console.log(i);
         // }
         
 // ✅ Console Method
@@ -202,6 +204,17 @@ console.log("------------------------");
 
         function renderAutoItem(brewery) {
             // ❗ your code here
+            // console.log("Function fired!");
+
+            // create <option> DOM elemenet / assign to variable
+            let item = document.createElement('option');
+
+            // assign value to be "brewery.name"
+
+            item.value = brewery.name;
+
+            // append <option> to autoCompleteBox
+            autoCompleteBox.append(item);
         }
 
         // ✅ Check Answer: 
@@ -237,10 +250,21 @@ console.log("------------------------");
 
         function returnAutoComplete(e) {
             // ❗ your code here
+            let query = e.target.value;
+
+            fetch(BASE_URL + `/autocomplete?query=${query}`)
+            .then(response => response.json())
+            .then(breweries => {
+                autoCompleteBox.replaceChildren();
+                breweries.forEach(renderAutoItem);
+            }).catch(error => {
+                console.error(`ERROR: ${error}`)
+            })
+
         }
 
         // ✅ Check Answer: 
-        // searchBox.addEventListener('input', returnAutoComplete);
+        searchBox.addEventListener('input', returnAutoComplete);
 
         // ❗ Check Assertion
         // console.assert(autoCompleteBox.children.length > 0, { errorMsg: "autoCompleteBox is empty" });

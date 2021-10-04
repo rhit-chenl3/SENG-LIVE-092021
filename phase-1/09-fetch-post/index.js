@@ -119,6 +119,20 @@ console.log("------------------------");
 
 		function loadComments() {
 			// ❗ your code here
+			fetch(BASE_URL + '/comments') // returns a promise
+    
+    		// once first Promise is resolved...
+    		.then(resp => resp.json()) // ...convert the response into JSON and return another promise
+    
+			// once second Promise is resolved...
+			.then(items => {
+			    // ...console.log the JS response
+			    // console.log(items)
+
+				items.forEach(renderComment);
+			});
+				
+		
 		}
 
 		// ✅ Check Answer: 
@@ -140,6 +154,17 @@ console.log("------------------------");
 
 		function renderComment(comment) {
 			// ❗ your code here
+			const commentCard = document.createElement("div");
+			const userName = document.createElement("h3");
+			const userContent = document.createElement("p");
+
+			commentCard.className = "comment-card";
+			userName.textContent = "Added by: " + comment.user;
+			userContent.textContent = comment.content;
+			
+			commentCard.append(userName, userContent);
+			commentsContainer.append(commentCard);
+			
 		}
 
 		// ✅ Check Answer: 
@@ -172,9 +197,34 @@ console.log("------------------------");
 
 		//  ✔️ Resets the input values of commentsForm
 
-	function createComment() {
+	function createComment(event) {
 		// ❗ your code here
+		event.preventDefault();
+
+		let commentUser = event.target.user.value;
+		let commentContent = event.target.content.value;
+
+		let item = { id: commentsContainer.children.length + 1, user: commentUser, content: commentContent };
+
+		fetch(BASE_URL + '/comments', {
+			// ❗ specify method
+			method: 'POST',
+			// ❗ specify headers
+			headers: {
+			'Content-Type': 'application/json',
+			},
+			// ❗ convert the item into a JSON string, necessary for compatibility with db.json 
+			body: JSON.stringify(item),
+		})
+		.then(resp => resp.json())
+		.then(comment => {
+			renderComment(comment);
+			console.log('Success!');
+		});
+		commentsForm.reset();
+
 	}
+
 
 	// ✅ Check Answer: 
 	function init() {
